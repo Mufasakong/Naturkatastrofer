@@ -40,7 +40,7 @@ public class InputField {
 
 
     void DRAW() {
-        // DRAWING THE BACKGROUND
+
         if (selected) {
             p.fill(p.color(160, 160, 160));
         } else {
@@ -62,19 +62,15 @@ public class InputField {
         p.text(Text, X + (p.textWidth("a") / 2), Y + TEXTSIZE);
     }
 
-    // IF THE KEYCODE IS ENTER RETURN 1
-    // ELSE RETURN 0
     boolean KEYPRESSED(char KEY, int KEYCODE) {
         if (selected) {
             if (KEYCODE == (int)p.BACKSPACE) {
                 BACKSPACE();
             } else if (KEYCODE == 32) {
-                // SPACE
                 addText(' ');
             } else if (KEYCODE == (int)p.ENTER) {
                 return true;
             } else {
-                // CHECK IF THE KEY IS A LETTER OR A NUMBER
                 boolean isKeyCapitalLetter = (KEY >= 'A' && KEY <= 'Z');
                 boolean isKeySmallLetter = (KEY >= 'a' && KEY <= 'z');
                 //boolean isKeyNumber = (KEY >= '0' && KEY <= '9');
@@ -89,7 +85,6 @@ public class InputField {
     }
 
     private void addText(char text) {
-        // IF THE TEXT WIDHT IS IN BOUNDARIES OF THE TEXTBOX
         if (p.textWidth(Text + text) < W) {
             Text += text;
             TextLength++;
@@ -103,8 +98,6 @@ public class InputField {
         }
     }
 
-    // FUNCTION FOR TESTING IS THE POINT
-    // OVER THE TEXTBOX
     private boolean overBox(int x, int y) {
         if (x >= X && x <= X + W) {
             if (y >= Y && y <= Y + H) {
