@@ -7,9 +7,10 @@ public class InputField {
     PApplet p;
     public int X, Y, H, W;
 
+    /*
     InputField(PApplet p) {
         this.p = p;
-    }
+    } */
 
     InputField(PApplet p, int X, int Y, int W, int H) {
         this.p = p;
@@ -29,18 +30,17 @@ public class InputField {
     public color Border = color(30, 30, 30);
 */
     public boolean BorderEnable = false;
-    public int BorderWeight = 1;
+    public int BorderWeight = 5;
 
     public String Text = "";
     public int TextLength = 0;
 
-    private boolean selected = false;
+    public boolean selected = false;
 
 
 
 
     void DRAW() {
-
         if (selected) {
             p.fill(p.color(160, 160, 160));
         } else {
@@ -48,10 +48,11 @@ public class InputField {
         }
 
         if (BorderEnable) {
+
+            p.noStroke();
+        } else {
             p.strokeWeight(BorderWeight);
             p.stroke(p.color(30, 30, 30));
-        } else {
-            p.noStroke();
         }
 
         p.rect(X, Y, W, H);
@@ -73,9 +74,9 @@ public class InputField {
             } else {
                 boolean isKeyCapitalLetter = (KEY >= 'A' && KEY <= 'Z');
                 boolean isKeySmallLetter = (KEY >= 'a' && KEY <= 'z');
-                //boolean isKeyNumber = (KEY >= '0' && KEY <= '9');
+                boolean isKeyNumber = (KEY >= '0' && KEY <= '9');
 
-                if (isKeyCapitalLetter || isKeySmallLetter) {
+                if (isKeyCapitalLetter || isKeySmallLetter || isKeyNumber) {
                     addText(KEY);
                 }
             }
@@ -85,6 +86,7 @@ public class InputField {
     }
 
     private void addText(char text) {
+        // IF THE TEXT WIDHT IS IN BOUNDARIES OF THE TEXTBOX
         if (p.textWidth(Text + text) < W) {
             Text += text;
             TextLength++;
